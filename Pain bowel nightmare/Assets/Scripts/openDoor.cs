@@ -14,6 +14,8 @@ public class openDoor : MonoBehaviour {
     private bool alreadyOpen = false;
     private Quaternion defaultRotation;
     private Quaternion openRotation;
+    public AudioClip openSound;
+    public AudioClip closeSound;
 	// Use this for initialization
 	void Start () {
         openDoorPrompt.SetActive(false);
@@ -58,11 +60,13 @@ public class openDoor : MonoBehaviour {
         {
             openRotation = Quaternion.Euler(0, openDoorDegree, 0);
             transform.localRotation = Quaternion.Slerp(transform.localRotation, openRotation, Time.deltaTime * openDoorTime);
+            //AudioSource.PlayClipAtPoint(openSound, transform.position);
         }
         if (alreadyOpen == false)
         {
             defaultRotation = Quaternion.Euler(0, closeDoorDegree, 0);
             transform.localRotation = Quaternion.Slerp(transform.localRotation, defaultRotation, Time.deltaTime * openDoorTime);
+            //AudioSource.PlayClipAtPoint(closeSound, transform.position);
         }
 
         if (canThisDoorBeOpened == true)
