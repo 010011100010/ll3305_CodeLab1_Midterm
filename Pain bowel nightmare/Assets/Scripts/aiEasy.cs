@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class aiEasy : MonoBehaviour {
     private float fpsTargetDistance;
+    private CharacterController character;
+
     public float enemyLookDistance;
     public float attackDistance;
     public float enemyMovementSpeed;
@@ -11,11 +13,14 @@ public class aiEasy : MonoBehaviour {
     public Transform fpsTarget;
     public Rigidbody theRigidbody;
     public Renderer myRenderer;
+    public AudioSource monsterSource;
+    public AudioClip monsterClip;
 
 	// Use this for initialization
 	void Start () {
         //myRenderer = GetComponent<Renderer>();
         //theRigidbody = GetComponent<Rigidbody>();
+        character = GetComponent<CharacterController>();
 	}
 	
 	// Update is called once per frame
@@ -41,6 +46,8 @@ public class aiEasy : MonoBehaviour {
 
     void Attack()
     {
-
+        //transform.Translate(new Vector3(enemyMovementSpeed, 0, 0));
+        //transform.position += transform.forward * enemyMovementSpeed * Time.deltaTime;
+        monsterSource.PlayOneShot(monsterClip);
     }
 }
