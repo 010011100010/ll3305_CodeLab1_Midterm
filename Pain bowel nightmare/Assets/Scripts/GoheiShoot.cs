@@ -21,7 +21,7 @@ public class GoheiShoot : MonoBehaviour
     {
         emitter = GameObject.Find("BulletShooter").transform.position;
 
-        if (GameObject.Find("Gohei rod").GetComponent<equipA2>().equipped == true && Input.GetMouseButtonDown(0))
+        if (GameObject.Find("Gohei rod").GetComponent<equipA2>().equipped == true && Input.GetMouseButton(0))
         {
             GameObject bullet = Instantiate(projectile, emitter, Quaternion.identity)
                as GameObject;
