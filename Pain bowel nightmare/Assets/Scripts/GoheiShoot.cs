@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoheiShoot : MonoBehaviour
 {
-    public GameObject projectile;
+    public GameObject[] projectile;
     public Vector3 emitter;
     public float bulletForce = 10f;
     public AudioClip pewSound;
@@ -23,7 +23,7 @@ public class GoheiShoot : MonoBehaviour
 
         if (GameObject.Find("Gohei rod").GetComponent<equipA2>().equipped == true && Input.GetMouseButton(0))
         {
-            GameObject bullet = Instantiate(projectile, emitter, Quaternion.identity)
+            GameObject bullet = Instantiate(projectile[Random.Range(0, 3)], emitter, Quaternion.identity)
                as GameObject;
             bullet.GetComponent<Rigidbody>().AddForce(transform.up * bulletForce);
             mySource.PlayOneShot(pewSound);
