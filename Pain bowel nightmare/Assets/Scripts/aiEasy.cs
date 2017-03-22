@@ -10,7 +10,7 @@ public class aiEasy : MonoBehaviour {
     public float attackDistance;
     public float enemyMovementSpeed;
     public float damping;
-    public Transform fpsTarget;
+    private Transform fpsTarget;
     public Rigidbody theRigidbody;
     public Renderer myRenderer;
     public AudioSource monsterSource;
@@ -21,6 +21,7 @@ public class aiEasy : MonoBehaviour {
         //myRenderer = GetComponent<Renderer>();
         //theRigidbody = GetComponent<Rigidbody>();
         character = GetComponent<CharacterController>();
+        fpsTarget = GameObject.Find("FPSController").transform;
 	}
 	
 	// Update is called once per frame
