@@ -77,7 +77,7 @@ public class equipA2 : MonoBehaviour {
     void MoveToCamera ()
     {
         
-        float step = speed * Time.deltaTime;
+        //float step = speed * Time.deltaTime;
         //transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
 		GetComponent<Collider>().enabled = false;
 		GetComponent<Rigidbody>().useGravity = false;
