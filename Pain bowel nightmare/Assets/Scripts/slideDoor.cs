@@ -9,7 +9,7 @@ public class slideDoor : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         slideInPos = transform.position + new Vector3(0, 0, 3);
-        doorTrigger = GetComponent<Collider>();
+        doorTrigger = GetComponentInParent<Collider>();
 	}
 	
 	// Update is called once per frame
