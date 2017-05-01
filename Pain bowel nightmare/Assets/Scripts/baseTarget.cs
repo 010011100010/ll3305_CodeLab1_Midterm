@@ -9,7 +9,7 @@ public class baseTarget : MonoBehaviour {
     private Rigidbody rb;
     public GameObject[] explosions;
 
-    float _health = 100f;
+	float _health = 10f;
     public float health
     {
         get { return _health; }
@@ -34,11 +34,18 @@ public class baseTarget : MonoBehaviour {
 
     public virtual void Update ()
     {
-        rb.velocity = new Vector3(moveSpeed * (Mathf.PerlinNoise(Time.timeSinceLevelLoad, 0) - 0.5f) * 2, moveSpeed * (Mathf.PerlinNoise(0, Time.timeSinceLevelLoad) - 0.5f) * 2, 0);
+		rb.velocity = new Vector3(moveSpeed * (Mathf.PerlinNoise(Time.timeSinceLevelLoad, 0) - 0.5f) * 2, moveSpeed * (Mathf.PerlinNoise(0, Time.timeSinceLevelLoad) - 0.5f) * 2, moveSpeed * (Mathf.PerlinNoise(0, Time.timeSinceLevelLoad) - 0.5f) * 2);
     }
+
+	protected virtual void OnCollisionEnter(Collision collision){
+		if (collision.gameObject.tag == "Bullet") {
+			health -= 5f;
+		}
+	}
 
     protected virtual void Die()
     {
         Instantiate(explosions[Random.Range(0, explosions.Length)], transform.position, Quaternion.identity);
+		Destroy (gameObject);
     }
 }

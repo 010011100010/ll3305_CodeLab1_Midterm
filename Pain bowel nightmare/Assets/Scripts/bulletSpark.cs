@@ -16,7 +16,7 @@ public class bulletSpark : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Invoke("StarryExplosion", deathTimer);
+        //Invoke("StarryExplosion", deathTimer);
 
     }
 

@@ -43,10 +43,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private AudioSource m_AudioSource;
 
 
-        void Awake()
+        /*void Awake()
         {
             DontDestroyOnLoad(transform.gameObject);
-        }
+        }*/
         // Use this for initialization
         private void Start()
         {
