@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class cubeTarget : baseTarget {
-
+	public float torque = 20;
 	// Use this for initialization
 	new void Start () {
 		base.Start ();
@@ -13,5 +13,7 @@ public class cubeTarget : baseTarget {
 	new void Update () {
 		base.Update ();
 		Debug.Log (health);
+		float turn = Input.GetAxis ("Horizontal");
+		rb.AddTorque (transform.forward * torque * turn);
 	}
 }

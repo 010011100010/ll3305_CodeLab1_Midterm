@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class spawnManager : MonoBehaviour {
@@ -7,8 +8,10 @@ public class spawnManager : MonoBehaviour {
 	public GameObject[] spawnLocation;
 	public GameObject[] targets;
 	public GameObject[] explosions;
-
-	int _timer = 3000;
+	public Text destroyCount;
+	private int targetCount = 5;
+	private int count;
+	/*int _timer = 3000;
 	public int timer
 	{
 		get {return _timer;}
@@ -18,15 +21,15 @@ public class spawnManager : MonoBehaviour {
 				_timer = 0;
 		} else {_timer = value;}
 		}
-	}
+	}*/
 	// Use this for initialization
 	void Start () {
-		
+		count = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		timer -= Mathf.RoundToInt(Time.deltaTime*60);
+		/*timer -= Mathf.RoundToInt(Time.deltaTime*60);
 		//print (Time.fixedDeltaTime);
 		//Debug.Log (Time.deltaTime);
 		//print (Mathf.RoundToInt (Time.deltaTime));
@@ -35,5 +38,18 @@ public class spawnManager : MonoBehaviour {
 			Instantiate (targets[Random.Range(0, targets.Length)], spawnLocation[Random.Range(0, spawnLocation.Length)].transform.position, Quaternion.identity);
 			print ("Target spawned!");
 		}
+	}*/
+
+		for (int i=0; i<targetCount; i++){
+			if (GameObject.FindGameObjectWithTag("Monster") == null){
+				Instantiate (targets[Random.Range(0, targets.Length)], spawnLocation[Random.Range(0, spawnLocation.Length)].transform.position, Quaternion.identity);
+				print ("Target spawned!");
+			}
+		}
+	}
+
+	void SetCount () {
+		count = count + 1;
+		destroyCount.text = "Targets destroyed: " + count.ToString () + "/" + targetCount.ToString ();
 	}
 }

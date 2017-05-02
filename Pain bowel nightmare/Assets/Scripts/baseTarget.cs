@@ -6,7 +6,7 @@ public class baseTarget : MonoBehaviour {
 
     protected string name = "Basic Target";
     public float moveSpeed = 2f;
-    private Rigidbody rb;
+	protected Rigidbody rb;
 	private GameObject[] explosions;
 
 	float _health = 10f;
@@ -48,6 +48,7 @@ public class baseTarget : MonoBehaviour {
     {
         Instantiate(explosions[Random.Range(0, explosions.Length)], transform.position, Quaternion.identity);
 		Destroy (gameObject);
+		GameObject.Find ("Spawn Manager").SendMessage ("SetCount");
     }
 
 	protected virtual void HitByRay()
