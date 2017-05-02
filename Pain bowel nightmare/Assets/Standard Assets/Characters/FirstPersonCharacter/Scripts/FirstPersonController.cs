@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -41,6 +42,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+		public AudioClip spawnSound;
+		public AudioClip errorSound;
+		public Text notification;
 
 
         /*void Awake()
@@ -260,5 +264,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
+
+		void SpawnText (){
+			m_AudioSource.PlayOneShot (spawnSound);
+			notification.text = "A target has spawned!";
+			Invoke ("ClearText", 3f);
+		}
+
+		void ErrorText () {
+			m_AudioSource.PlayOneShot (errorSound);
+			notification.text = "You have missed a target!";
+			Invoke ("ClearText", 3f);
+		}
+
+		void ClearText() {
+			notification.text = " ";
+		}
     }
 }

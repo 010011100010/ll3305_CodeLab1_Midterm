@@ -9,8 +9,11 @@ public class spawnManager : MonoBehaviour {
 	public GameObject[] targets;
 	public GameObject[] explosions;
 	public Text destroyCount;
+	public Text missedCount;
 	private int targetCount = 5;
 	private int count;
+	private int missedInt;
+	private int i;
 	/*int _timer = 3000;
 	public int timer
 	{
@@ -24,7 +27,10 @@ public class spawnManager : MonoBehaviour {
 	}*/
 	// Use this for initialization
 	void Start () {
+		//missedCount = GameObject.Find ("Target missed");
 		count = 0;
+		missedInt = 0;
+		i = 0;
 	}
 	
 	// Update is called once per frame
@@ -40,10 +46,12 @@ public class spawnManager : MonoBehaviour {
 		}
 	}*/
 
-		for (int i=0; i<targetCount; i++){
+		for (i; i<targetCount; i++){
 			if (GameObject.FindGameObjectWithTag("Monster") == null){
 				Instantiate (targets[Random.Range(0, targets.Length)], spawnLocation[Random.Range(0, spawnLocation.Length)].transform.position, Quaternion.identity);
 				print ("Target spawned!");
+				print (i);
+				GameObject.Find ("FPSController").SendMessage ("SpawnText");
 			}
 		}
 	}
@@ -51,5 +59,11 @@ public class spawnManager : MonoBehaviour {
 	void SetCount () {
 		count = count + 1;
 		destroyCount.text = "Targets destroyed: " + count.ToString () + "/" + targetCount.ToString ();
+	}
+
+	void MissedCount () {
+		missedInt = missedInt + 1;
+		missedCount.text = "Targets missed: " + missedInt.ToString ();
+		GameObject.Find ("FPSController").SendMessage ("ErrorText");
 	}
 }
