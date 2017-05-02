@@ -7,7 +7,7 @@ public class baseTarget : MonoBehaviour {
     protected string name = "Basic Target";
     public float moveSpeed = 2f;
     private Rigidbody rb;
-    public GameObject[] explosions;
+	private GameObject[] explosions;
 
 	float _health = 10f;
     public float health
@@ -30,6 +30,7 @@ public class baseTarget : MonoBehaviour {
     public virtual void Start ()
     {
         rb = GetComponent<Rigidbody>();
+		explosions = GameObject.Find ("Spawn Manager").GetComponent<spawnManager> ().explosions;
     }
 
     public virtual void Update ()
@@ -48,4 +49,9 @@ public class baseTarget : MonoBehaviour {
         Instantiate(explosions[Random.Range(0, explosions.Length)], transform.position, Quaternion.identity);
 		Destroy (gameObject);
     }
+
+	protected virtual void HitByRay()
+	{
+		health -= 2f;
+	}
 }
