@@ -61,7 +61,7 @@ public class equipA2 : MonoBehaviour {
         {
             equipPrompt.SetActive(true);
         }
-		Debug.Log (equipTrigger);
+		//Debug.Log (equipTrigger);
         if (equipTrigger == true && Input.GetKeyDown(equipKey))
         {
             MoveToCamera();

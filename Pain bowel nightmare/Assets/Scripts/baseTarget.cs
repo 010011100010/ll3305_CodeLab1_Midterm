@@ -29,7 +29,7 @@ public class baseTarget : MonoBehaviour {
         }
     }
 
-	protected float _timer = 10f;
+	protected float _timer = 12f;
 	public float timer
 	{
 		get { return _timer;}
