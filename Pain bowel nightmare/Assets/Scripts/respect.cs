@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class respect : MonoBehaviour {
     public Collider soulCol;
@@ -20,6 +21,7 @@ public class respect : MonoBehaviour {
 		if (soulJudge == true && Input.GetKeyDown(KeyCode.F))
         {
             soulVoice.PlayOneShot(soulClip);
+			Invoke ("Gameover", 16f);
         }
 	}
 
@@ -33,4 +35,8 @@ public class respect : MonoBehaviour {
     {
         if (soulCol.gameObject.name == "FPSController") { soulPrompt.SetActive(true); soulJudge = true; }
     }
+
+	void Gameover () {
+		SceneManager.LoadScene ("Victory", LoadSceneMode.Single);
+	}
 }

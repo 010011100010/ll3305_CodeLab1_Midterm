@@ -45,12 +45,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public AudioClip spawnSound;
 		public AudioClip errorSound;
 		public Text notification;
+		//private static FirstPersonController instance;
 
 
         /*void Awake()
         {
-            DontDestroyOnLoad(transform.gameObject);
+			DontDestroyOnLoad(transform.gameObject);
+			if (GameObject.Find ("FPSController2") == null) {
+				print ("FPSController preserved");
+			} else{Destroy (gameObject);}
+
         }*/
+
+
+
         // Use this for initialization
         private void Start()
         {

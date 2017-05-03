@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class spawnManager : MonoBehaviour {
 	//public int timer = 300;
@@ -10,10 +11,11 @@ public class spawnManager : MonoBehaviour {
 	public GameObject[] explosions;
 	public Text destroyCount;
 	public Text missedCount;
-	private int targetCount = 5;
+	private int targetCount = 15;
 	private int count;
 	private int missedInt;
-	private int i;
+	private int i = 0;
+	private bool isInstanciated = false;
 	/*int _timer = 3000;
 	public int timer
 	{
@@ -30,7 +32,7 @@ public class spawnManager : MonoBehaviour {
 		//missedCount = GameObject.Find ("Target missed");
 		count = 0;
 		missedInt = 0;
-		i = 0;
+		//i = 0;
 	}
 	
 	// Update is called once per frame
@@ -45,25 +47,41 @@ public class spawnManager : MonoBehaviour {
 			print ("Target spawned!");
 		}
 	}*/
-
-		for (i; i<targetCount; i++){
-			if (GameObject.FindGameObjectWithTag("Monster") == null){
-				Instantiate (targets[Random.Range(0, targets.Length)], spawnLocation[Random.Range(0, spawnLocation.Length)].transform.position, Quaternion.identity);
-				print ("Target spawned!");
-				print (i);
-				GameObject.Find ("FPSController").SendMessage ("SpawnText");
-			}
+		if (missedInt > 5) {
+			SceneManager.LoadScene ("Defeat", LoadSceneMode.Single);
 		}
+
+		if (count + missedInt == targetCount && count >= 10) {
+			SceneManager.LoadScene ("Victory", LoadSceneMode.Single);
+		}
+
+
+		if (isInstanciated == false && GameObject.FindGameObjectWithTag("Monster") == null && count+missedInt <= targetCount){
+			StartCoroutine ("SpawnTarget", 3f);
+			print ("Target spawned!");
+			print (count+missedInt);
+			}
+	
 	}
 
 	void SetCount () {
 		count = count + 1;
-		destroyCount.text = "Targets destroyed: " + count.ToString () + "/" + targetCount.ToString ();
+		destroyCount.text = "Targets destroyed: " + count.ToString () + "/" + (targetCount+1).ToString ();
 	}
 
 	void MissedCount () {
 		missedInt = missedInt + 1;
 		missedCount.text = "Targets missed: " + missedInt.ToString ();
 		GameObject.Find ("FPSController").SendMessage ("ErrorText");
+	}
+
+	IEnumerator SpawnTarget (float t) {
+		isInstanciated = true;
+		print (this.gameObject.name);
+		yield return new WaitForSeconds (t);
+		print ("Coroutine started");
+		Instantiate (targets[Random.Range(0, targets.Length)], spawnLocation[Random.Range(0, spawnLocation.Length)].transform.position, Quaternion.identity);
+		GameObject.Find ("FPSController").SendMessage ("SpawnText");
+		isInstanciated = false;
 	}
 }

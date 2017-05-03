@@ -8,7 +8,7 @@ public class baseTarget : MonoBehaviour {
     protected string name = "Basic Target";
     public float moveSpeed = 2f;
 	protected Rigidbody rb;
-	private GameObject[] explosions;
+	protected GameObject[] explosions;
 	private Vector3 zero;
 
 	protected float _health = 10f;
